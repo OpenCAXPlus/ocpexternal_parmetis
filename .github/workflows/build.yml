@@ -8,11 +8,11 @@ on:
       id:
         description: "Software id"
         required: true
-        default: "spdlog"
+        default: "parmetis"
       version:
         description: "Software version"
         required: true
-        default: "1.11.0"
+        default: "4.0.3"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,4 +26,4 @@ jobs:
       - name: Prepare and Install
         run: |
           source scripts/prepare.sh ${{ github.event.inputs.version }} ${{ github.event.inputs.id }}
-          source ocp/external/${{ github.event.inputs.id }}/${{ github.event.inputs.version }}/configurations/default.sh
+          source ocp/external/${{ github.event.inputs.id }}/${{ github.event.inputs.version }}/configurations/int32.sh

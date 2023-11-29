@@ -1,5 +1,10 @@
 # OpenCAX+ External Template
 
+Set environment variable to switch the compiler
+```bash
+CC=mpiicx
+CXX=mpiicpx
+```
 This is a template repository for external dependencies of the OpenCAX+ projects.
 
 External dependencies are used for both toolkits or starters of the OpenCAX+ SDK.

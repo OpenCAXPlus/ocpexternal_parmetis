@@ -2,8 +2,8 @@
 # This is the script to check whether the compressed file has required
 # structure
 
-version=${1}
-external_id=${2}
+version=${1:-"4.0.3"}
+external_id=${2:-"parmetis"}
 
 xzfile="$external_id-$version.tar.xz"
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"

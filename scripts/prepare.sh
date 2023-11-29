@@ -2,12 +2,14 @@
 # You should modify this script to prepare the folder structure for external project source codes
 # The source code must be in ocp/external/external_id/version/source folder
 # get command line arguments
-version=${1}
-external_id=${2}
-clean=${3:-clean}
+version=${1:-"4.0.3"}
+external_id=${2:-"parmetis"}
+download=${3:-"nodownload"}
 
 # prepare necessary variables
-url="https://github.com/gabime/spdlog/archive/refs/tags/v$version.tar.gz"
+# http://glaros.dtc.umn.edu/gkhome/fetch/sw/parmetis/parmetis-4.0.3.tar.gz
+url="http://glaros.dtc.umn.edu/gkhome/fetch/sw/parmetis/$external_id-$version.tar.gz"
+# older version url is http://glaros.dtc.umn.edu/gkhome/fetch/sw/parmetis/OLD/parmetis-4.0a3.tar.gz
 dir="ocp/external/$external_id/$version/source"
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 gz_file="$external_id-v$version.tar.gz"
@@ -15,8 +17,9 @@ gz_file="$external_id-v$version.tar.gz"
 cd $script_dir/..
 
 # start the script
-if [ "$clean" == "clean" ]; then
+if [ "$download" == "download" ]; then
   rm -rf *.tar.gz
+  # wget -cO - $url > $gz_file
   wget -O $gz_file $url
   echo "Download $external_id $version"
 fi
