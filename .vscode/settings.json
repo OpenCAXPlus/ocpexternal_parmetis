@@ -1,0 +1,7 @@
+{
+    "yaml.schemas": {
+        "${workspaceFolder}/ocp.schema.json": [
+            "file://${workspaceFolder}/ocp.yml"
+        ]
+    }
+}

@@ -1,0 +1,33 @@
+name: External Publish
+defaults:
+  run:
+    shell: bash -ileo pipefail {0}
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: "Software id"
+        required: true
+        default: "spdlog"
+      version:
+        description: "Software version"
+        required: true
+        default: "1.11.0"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Basic info
+        run: |
+          echo "Build for ${{ github.ref }} branch in ${{ github.repository }} repository."
+          echo "Job triggered by ${{ github.event_name }}, on self-hosted ${{ runner.os }}."
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Setup Rclone
+        uses: AnimMouse/setup-rclone@v1
+        with:
+          rclone_config: ${{ secrets.RCLONE_CONFIG }}
+      - name: Publish
+        run: |
+          source scripts/prepare.sh ${{ github.event.inputs.version }} ${{ github.event.inputs.id }}
+          source scripts/publish.sh ${{ github.event.inputs.version }} ${{ github.event.inputs.id }}
