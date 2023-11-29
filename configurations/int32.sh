@@ -15,6 +15,6 @@ cd $build_dir
 # replace the IDXTYPEWIDTH number with 32 
 sed -i 's/^#define IDXTYPEWIDTH [0-9]*$/#define IDXTYPEWIDTH 32/' metis/include/metis.h
 make config cc=$CC cxx=$CXX prefix=$install_dir
-make
+make -j$(($(nproc) - 1))
 make install
 cd -
