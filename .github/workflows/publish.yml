@@ -29,5 +29,5 @@ jobs:
           rclone_config: ${{ secrets.RCLONE_CONFIG }}
       - name: Publish
         run: |
-          source scripts/prepare.sh ${{ github.event.inputs.version }} ${{ github.event.inputs.id }}
+          source scripts/prepare.sh ${{ github.event.inputs.version }} ${{ github.event.inputs.id }} download 
           source scripts/publish.sh ${{ github.event.inputs.version }} ${{ github.event.inputs.id }}
