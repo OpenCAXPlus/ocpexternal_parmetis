@@ -6,15 +6,15 @@ config=$(basename "${BASH_SOURCE[0]}" .sh)
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 root="$script_dir/.."
 source_dir="$script_dir/../source"
-build_dir="$script_dir/../build/$config"
-install_dir="$script_dir/../install/$config"
+build_dir="$script_dir/../build/$OCP_COMPILER/$config"
+install_dir="$script_dir/../install/$OCP_COMPILER/$config"
 
 mkdir -p $build_dir
 cp -r $source_dir/* $build_dir
 cd $build_dir
 # replace the IDXTYPEWIDTH number with 32 
 sed -i 's/^#define IDXTYPEWIDTH [0-9]*$/#define IDXTYPEWIDTH 32/' metis/include/metis.h
-make config cc=$CC cxx=$CXX prefix=$install_dir
+make config cc=$OCP_CC cxx=$OCP_CXX prefix=$install_dir
 make -j$(($(nproc) - 1))
 make install
 cd -
