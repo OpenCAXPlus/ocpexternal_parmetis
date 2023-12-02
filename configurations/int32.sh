@@ -18,3 +18,9 @@ make config cc=$OCP_CC cxx=$OCP_CXX prefix=$install_dir
 make -j$(($(nproc) - 1))
 make install
 cd -
+
+cd $build_dir/metis
+make config cc=$OCP_CC cxx=$OCP_CXX prefix=$install_dir
+make -j$(($(nproc) - 1))
+make install
+cd -
